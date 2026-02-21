@@ -1,288 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>CRUD Image Text Viewer</title>
-
-<style>
-
-body{
-font-family:Segoe UI, Tahoma, sans-serif;
-font-size:16px;
-background:#016764;
-margin:0;
-color:white;
-}
-header {
-        display: flex;
-        align-items: center;
-        padding: 10px 20px;
-        height: 15vh;
-        background-color:  #001E1E;
-        color: white;
-        position: relative; 
-    }
-    
-    .hamburger {
-        background: none;
-        border: none;
-        cursor: pointer;
-        display: flex;
-        flex-direction: column;
-        gap: 5px;
-        position: absolute;
-        right: 20px;
-    }
-    
-    .bar {
-        width: 25px;
-        height: 3px;
-        background-color: white;
-        border-radius: 3px;
-        transition: 0.3s;
-    }
-    
-    .menu {
-        display: none;
-        flex-direction: column;
-        align-items: center;
-        position: absolute;
-        top: 110px;
-        right: 20px;
-        background-color: #00312F;
-        border-radius: 5px;
-        width: 200px;
-    }
-    
-    .menu ul {
-        list-style-type: none;
-        padding: 0;
-        margin: 0;
-    }
-    
-    .menu li {
-        margin: 10px 0;
-    }
-    
-    .menu a {
-        color: rgb(255, 255, 255);
-        text-decoration: none;
-        padding: 10px 20px;
-        display: block;
-        width: 100%;
-        text-align: center;
-        
-    }
-    
-    
-.menu.active {
-    display: flex;
-}
-
-.clickhome{
-padding:10px 18px;
-border:none;
-border-radius:6px;
-cursor:pointer;
-background:#014848;
-color:white;
-transition:0.3s;
-margin:5px;
-text-decoration: none;
-}
-
-
-.container{
-width:90%;
-max-width:900px;
-margin:auto;
-padding:20px;
-}
-
-/* Input Panel */
-
-.input-box{
-background:#003f3d;
-padding:20px;
-border-radius:12px;
-margin-bottom:30px;
-}
-
-input{
-width:70%;
-padding:10px;
-border-radius:6px;
-border:none;
-margin:5px 0;
-}
-
-button{
-padding:10px 18px;
-border:none;
-border-radius:6px;
-cursor:pointer;
-background:#014848;
-color:white;
-transition:0.3s;
-margin:5px;
-}
-
-button:hover{
-background:#026b69;
-}
-
-/* Cards */
-
-#listContainer{
-display:flex;
-flex-wrap:wrap;
-gap:20px;
-justify-content:center;
-}
-
-.card{
-background:#004d4a;
-padding:15px;
-border-radius:12px;
-width:200px;
-text-align:center;
-box-shadow:0 0 10px rgba(0,0,0,0.3);
-}
-
-.card img{
-width:100%;
-height:140px;
-object-fit:cover;
-border-radius:8px;
-margin-bottom:10px;
-cursor:pointer;
-}
-
-/* Modal Viewer */
-
-.modal{
-display:none;
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.85);
-justify-content:center;
-align-items:center;
-z-index:1000;
-}
-
-.modal img{
-max-width:90%;
-max-height:90%;
-border-radius:10px;
-}
-
-.close{
-position:absolute;
-top:20px;
-right:30px;
-font-size:30px;
-cursor:pointer;
-color:white;
-}
-
-/* Responsive */
-/* Tablet */
-@media (max-width:1024px){
-
-.container{
-width:95%;
-}
-
-.card{
-width:48%;
-}
-
-}
-
-/* Mobile */
-@media (max-width:768px){
-
-header h1{
-font-size:1.4rem;
-}
-
-.container{
-width:98%;
-padding:10px;
-}
-
-.input-box{
-text-align:center;
-padding:15px;
-}
-
-input{
-width:100%;
-font-size:16px;
-padding:12px;
-}
-
-button{
-width:100%;
-padding:12px;
-font-size:16px;
-}
-
-.clickhome{
-display:block;
-width:100%;
-text-align:center;
-padding:12px;
-}
-
-#listContainer{
-flex-direction:column;
-align-items:center;
-}
-
-.card{
-width:95%;
-max-width:320px;
-padding:15px;
-}
-
-.card img{
-height:180px;
-}
-
-.modal img{
-max-width:98%;
-}
-
-.close{
-top:10px;
-right:20px;
-font-size:35px;
-}
-
-}
-
-/* Small phones */
-@media (max-width:400px){
-
-header h1{
-font-size:1.2rem;
-}
-
-.card img{
-height:160px;
-}
-
-}
-
-
-
-
-</style>
+ <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link rel="stylesheet" href="displays/model1.css">
+<title>Model#1</title>
 </head>
 <body>
     <header>
@@ -354,6 +78,25 @@ document.getElementById("hamburgerButton").addEventListener("click", function() 
 
 let items = [];
 
+/* Load saved data */
+
+window.onload = function(){
+
+let storedData = localStorage.getItem("digitalFolderData");
+
+if(storedData){
+items = JSON.parse(storedData);
+render();
+}
+
+};
+
+/* Save data */
+
+function saveData(){
+localStorage.setItem("digitalFolderData", JSON.stringify(items));
+}
+
 /* Add Item */
 
 function addItem(){
@@ -363,61 +106,105 @@ let file = document.getElementById("imgInput").files[0];
 
 if(text === "" && !file) return;
 
+let newItem = {
+text:text,
+image:null
+};
+
 if(file){
 
 let reader = new FileReader();
 
 reader.onload = function(e){
 
-items.push({
-type:"image",
-data:e.target.result
-});
+newItem.image = e.target.result;
+items.push(newItem);
 
+saveData();
 render();
-}
+
+};
 
 reader.readAsDataURL(file);
 
 }else{
 
-items.push({
-type:"text",
-data:text
-});
-
+items.push(newItem);
+saveData();
 render();
+
 }
 
 document.getElementById("textInput").value="";
 document.getElementById("imgInput").value="";
+
 }
 
-/* Delete */
+/* Delete Item */
 
 function deleteItem(index){
+
 items.splice(index,1);
+
+saveData();
 render();
+
 }
 
-/* Edit Text */
+/* Edit Item */
 
 function editItem(index){
 
-if(items[index].type === "text"){
+let item = items[index];
 
-let newText = prompt("Edit text", items[index].data);
+/* Edit text */
+
+let newText = prompt("Edit text", item.text);
 
 if(newText !== null){
-items[index].data = newText;
+item.text = newText;
 }
 
-}
+/* Edit image */
 
+if(confirm("Change image?")){
+
+let input = document.createElement("input");
+input.type="file";
+input.accept="image/*";
+
+input.onchange = function(){
+
+let file = input.files[0];
+
+if(file){
+
+let reader = new FileReader();
+
+reader.onload = function(e){
+
+item.image = e.target.result;
+
+saveData();
 render();
+
+};
+
+reader.readAsDataURL(file);
 }
 
-/* Render Display */
+};
+
+input.click();
+
+}
+
+saveData();
+render();
+
+}
+
+/* Render UI */
 
 function render(){
 
@@ -426,44 +213,27 @@ container.innerHTML="";
 
 items.forEach((item,index)=>{
 
-if(item.type === "text"){
+let imageHTML="";
 
-container.innerHTML += `
+if(item.image){
+imageHTML=`<img src="${item.image}" onclick="viewImage('${item.image}')">`;
+}
+
+container.innerHTML+=`
 <div class="card">
-<h3>${item.data}</h3>
+
+${imageHTML}
+
+<h3>${item.text}</h3>
 
 <button onclick="editItem(${index})">Edit</button>
 <button onclick="deleteItem(${index})">Delete</button>
+
 </div>
 `;
-
-}else{
-
-container.innerHTML += `
-<div class="card">
-<img src="${item.data}" onclick="viewImage('${item.data}')">
-
-<br>
-
-<button onclick="deleteItem(${index})">Delete</button>
-</div>
-`;
-
-}
 
 });
 
-}
-
-/* Image Viewer */
-
-function viewImage(src){
-document.getElementById("imageModal").style.display="flex";
-document.getElementById("modalImage").src=src;
-}
-
-function closeModal(){
-document.getElementById("imageModal").style.display="none";
 }
 
 </script>
