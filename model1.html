@@ -2,12 +2,14 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>CRUD Image Text Viewer</title>
 
 <style>
 
 body{
 font-family:Segoe UI, Tahoma, sans-serif;
+font-size:16px;
 background:#016764;
 margin:0;
 color:white;
@@ -188,23 +190,15 @@ color:white;
 }
 
 /* Responsive */
-
+/* Tablet */
 @media (max-width:1024px){
 
-.input-box{
-text-align:center;
-}
-
-input{
-width:90%;
-}
-
-#listContainer{
-gap:15px;
+.container{
+width:95%;
 }
 
 .card{
-width:45%;
+width:48%;
 }
 
 }
@@ -212,17 +206,37 @@ width:45%;
 /* Mobile */
 @media (max-width:768px){
 
+header h1{
+font-size:1.4rem;
+}
+
+.container{
+width:98%;
+padding:10px;
+}
+
 .input-box{
 text-align:center;
+padding:15px;
 }
 
 input{
 width:100%;
+font-size:16px;
+padding:12px;
 }
 
 button{
 width:100%;
-margin:6px 0;
+padding:12px;
+font-size:16px;
+}
+
+.clickhome{
+display:block;
+width:100%;
+text-align:center;
+padding:12px;
 }
 
 #listContainer{
@@ -231,19 +245,41 @@ align-items:center;
 }
 
 .card{
-width:90%;
+width:95%;
+max-width:320px;
+padding:15px;
+}
+
+.card img{
+height:180px;
 }
 
 .modal img{
-max-width:95%;
+max-width:98%;
 }
 
 .close{
 top:10px;
 right:20px;
+font-size:35px;
 }
 
 }
+
+/* Small phones */
+@media (max-width:400px){
+
+header h1{
+font-size:1.2rem;
+}
+
+.card img{
+height:160px;
+}
+
+}
+
+
 
 
 </style>
