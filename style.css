@@ -1,0 +1,328 @@
+*{
+box-sizing: border-box;
+padding: 0 ;
+margin: 0 ;
+font-family: "segoe UI",tahoma,geneva,verdana,sans-serif;
+}
+
+body {
+    background-color: #016764;
+}
+
+    header {
+        display: flex;
+        align-items: center;
+        padding: 10px 20px;
+        height: 15vh;
+        background-color:  #001E1E;
+        color: white;
+        position: relative; 
+    }
+    
+    .hamburger {
+        background: none;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        position: absolute;
+        right: 20px;
+    }
+    
+    .bar {
+        width: 25px;
+        height: 3px;
+        background-color: white;
+        border-radius: 3px;
+        transition: 0.3s;
+    }
+    
+    .menu {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        position: absolute;
+        top: 100px;
+        right: 20px;
+        background-color: #00312F;
+        border-radius: 5px;
+        width: 200px;
+    }
+    
+    .menu ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .menu li {
+        margin: 10px 0;
+    }
+    
+    .menu a {
+        color: rgb(255, 255, 255);
+        text-decoration: none;
+        padding: 10px 20px;
+        display: block;
+        width: 100%;
+        text-align: center;
+        
+    }
+    
+    
+    .menu.active {
+        display: flex;
+    }
+
+
+
+
+a {
+    text-decoration: none;
+    color: rgb(255, 250, 250);
+ }
+   .parent_landing {
+    height: 90vh; 
+    background-image: url("./");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center ;
+    background-attachment: fixed;
+    display: flex;
+   }
+.parent_landing .content { 
+    color:black;
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    
+}
+.parent_landing .title {
+    font-size: 2rem;
+    color: rgb(255, 255, 255);
+    text-align: left;
+    
+}
+.parent_landing p {
+    font-size: 1rem; 
+    color:rgb(255, 255, 255);
+    text-align: left;
+}
+
+
+.parent_landing .left_side {
+    width:45%;
+}
+.left_side .buttons {
+    display: flex; 
+    padding: 1rem 0;
+}
+.left_side .btn1 {
+    padding: 0.5rem;
+    margin: 0.5rem;
+    cursor: pointer;
+    background-color: #014848;
+    border-radius: 5px ;
+    color: white;
+}
+
+.section2 {
+    height: 100vh;
+    width: 80% ;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+.section2_content {
+    display: flex ;
+    gap: 4rem ;
+}
+
+.section2 .service {
+    background-color: #014848;
+    color:rgb(0, 0, 0) ;
+    border-radius:13px ;
+    padding: 1rem ;
+    text-align: center ;
+    max-width: 30% ;
+    min-width: 29 ;
+    cursor: default ; 
+    transition: all 0.3s ease-in-out;
+    box-shadow: -9px 12px 24px rgb rgb(0, 0, 0);
+    background-image: url("./") ;
+}
+
+
+.section2 .service:hover {
+    transform: scale(1.1);
+    background-color:#005958;
+    color: rgb(255, 255, 255) ;
+}
+
+
+.section2 .service:hover button {
+    background-color: transparent ;
+    outline: 2px solid #00312F ;
+    font-weight: bold ;
+    color: rgb(255, 255, 255) ;
+}
+
+.section2 .service button:hover {
+    background-color: #016764;
+    color: rgba(255, 255, 255, 0.814) ;
+    outline: none ; 
+}
+
+
+.section2 .service h1 {
+    padding-bottom: 1.2rem ;
+    color: rgb(255, 255, 255);
+    width: 80% ;
+    margin: 0 auto ;
+    border-bottom:1px solid rgb(255, 255, 255) ;
+}
+
+
+.section2 .service p {
+    color: rgb(255, 255, 255);
+    padding: 1rem ;
+}
+
+.section2 .service button { 
+    padding: 00.5rem 5rem;
+    cursor: pointer ;
+    font-size: 1rem ; 
+    margin: 1.5rem ;
+    border-radius: 5px ;
+    background-color:#005958 ;
+    color: rgb(235, 235, 230) ;
+    transition: all 0.3s ease-in-out ;
+}
+
+.Home {
+    height : 90vh; 
+    background-image : url("./wallpaperflare.com_wallpaper\ \(11\).jpg");
+    background-repeat : no-repeat;
+    background-size : cover;
+    background-position : center center;
+    background-attachment: fixed;
+    display: flex;
+    font-size: 1rem;
+    color: rgb(255, 255, 255);
+
+}
+
+@media (max-width: 1024px){
+
+.parent_landing .content{
+width:90%;
+}
+
+.parent_landing .left_side{
+width:60%;
+}
+
+.section2_content{
+flex-wrap:wrap;
+justify-content:center;
+gap:2rem;
+}
+
+.section2 .service{
+max-width:45%;
+}
+
+}
+
+/* Mobile */
+@media (max-width: 768px){
+
+header{
+height:auto;
+padding:10px;
+}
+
+.hamburger{
+right:15px;
+}
+
+.menu{
+width:160px;
+top:70px;
+}
+
+.parent_landing{
+height:auto;
+padding:40px 0;
+}
+
+.parent_landing .content{
+flex-direction:column;
+text-align:center;
+}
+
+.parent_landing .left_side{
+width:100%;
+}
+
+.parent_landing .title{
+font-size:1.5rem;
+text-align:center;
+}
+
+.parent_landing p{
+font-size:0.9rem;
+text-align:center;
+}
+
+.left_side .buttons{
+justify-content:center;
+flex-wrap:wrap;
+}
+
+.section2{
+height:auto;
+width:95%;
+}
+
+.section2_content{
+flex-direction:column;
+align-items:center;
+}
+
+.section2 .service{
+max-width:90%;
+}
+
+.section2 .service button{
+width:80%;
+margin:1rem auto;
+padding:0.5rem;
+}
+
+}
+
+/* Small Mobile */
+@media (max-width: 480px){
+
+.menu{
+right:10px;
+width:150px;
+}
+
+.parent_landing .title{
+font-size:1.3rem;
+}
+
+.section2 .service h1{
+width:90%;
+font-size:1.1rem;
+}
+
+.section2 .service p{
+font-size:0.9rem;
+}
+
+}

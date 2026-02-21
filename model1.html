@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CRUD Image Text Viewer</title>
+
+<style>
+
+body{
+font-family:Segoe UI, Tahoma, sans-serif;
+background:#016764;
+margin:0;
+color:white;
+}
+header {
+        display: flex;
+        align-items: center;
+        padding: 10px 20px;
+        height: 15vh;
+        background-color:  #001E1E;
+        color: white;
+        position: relative; 
+    }
+    
+    .hamburger {
+        background: none;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        position: absolute;
+        right: 20px;
+    }
+    
+    .bar {
+        width: 25px;
+        height: 3px;
+        background-color: white;
+        border-radius: 3px;
+        transition: 0.3s;
+    }
+    
+    .menu {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        position: absolute;
+        top: 110px;
+        right: 20px;
+        background-color: #00312F;
+        border-radius: 5px;
+        width: 200px;
+    }
+    
+    .menu ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .menu li {
+        margin: 10px 0;
+    }
+    
+    .menu a {
+        color: rgb(255, 255, 255);
+        text-decoration: none;
+        padding: 10px 20px;
+        display: block;
+        width: 100%;
+        text-align: center;
+        
+    }
+    
+    
+.menu.active {
+    display: flex;
+}
+
+.clickhome{
+padding:10px 18px;
+border:none;
+border-radius:6px;
+cursor:pointer;
+background:#014848;
+color:white;
+transition:0.3s;
+margin:5px;
+text-decoration: none;
+}
+
+
+.container{
+width:90%;
+max-width:900px;
+margin:auto;
+padding:20px;
+}
+
+/* Input Panel */
+
+.input-box{
+background:#003f3d;
+padding:20px;
+border-radius:12px;
+margin-bottom:30px;
+}
+
+input{
+width:70%;
+padding:10px;
+border-radius:6px;
+border:none;
+margin:5px 0;
+}
+
+button{
+padding:10px 18px;
+border:none;
+border-radius:6px;
+cursor:pointer;
+background:#014848;
+color:white;
+transition:0.3s;
+margin:5px;
+}
+
+button:hover{
+background:#026b69;
+}
+
+/* Cards */
+
+#listContainer{
+display:flex;
+flex-wrap:wrap;
+gap:20px;
+justify-content:center;
+}
+
+.card{
+background:#004d4a;
+padding:15px;
+border-radius:12px;
+width:200px;
+text-align:center;
+box-shadow:0 0 10px rgba(0,0,0,0.3);
+}
+
+.card img{
+width:100%;
+height:140px;
+object-fit:cover;
+border-radius:8px;
+margin-bottom:10px;
+cursor:pointer;
+}
+
+/* Modal Viewer */
+
+.modal{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.85);
+justify-content:center;
+align-items:center;
+z-index:1000;
+}
+
+.modal img{
+max-width:90%;
+max-height:90%;
+border-radius:10px;
+}
+
+.close{
+position:absolute;
+top:20px;
+right:30px;
+font-size:30px;
+cursor:pointer;
+color:white;
+}
+
+/* Responsive */
+
+@media (max-width:1024px){
+
+.input-box{
+text-align:center;
+}
+
+input{
+width:90%;
+}
+
+#listContainer{
+gap:15px;
+}
+
+.card{
+width:45%;
+}
+
+}
+
+/* Mobile */
+@media (max-width:768px){
+
+.input-box{
+text-align:center;
+}
+
+input{
+width:100%;
+}
+
+button{
+width:100%;
+margin:6px 0;
+}
+
+#listContainer{
+flex-direction:column;
+align-items:center;
+}
+
+.card{
+width:90%;
+}
+
+.modal img{
+max-width:95%;
+}
+
+.close{
+top:10px;
+right:20px;
+}
+
+}
+
+
+</style>
+</head>
+<body>
+    <header>
+    <h1>DIGITAL FOLDER  </h1>
+        <button class="hamburger" id="hamburgerButton">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </button>
+        
+        <nav class="menu" id="menu">
+            <ul>
+                <li><a href="./">About</a></li>
+                <li><a href="./">More</a></li>
+                <li><a href="./">More</a></li>
+                <li><a href="./">More</a></li>
+                <li><a href="./">More </a></li>
+            </ul>
+        </nav>
+    </header>
+
+
+<div class="container">
+
+<div class="input-box">
+<h2>Add Text or Image</h2>
+
+<input id="textInput" placeholder="Enter text">
+
+<br>
+
+<input type="file" id="imgInput" accept="image/*">
+
+<br>
+
+<button onclick="addItem()">Add Display</button>
+
+<a href="index.html" class="clickhome">Home</a>
+</div>
+
+<!-- list -->
+<div id="listContainer"></div>
+
+</div>
+
+<!-- Image Viewer Modal -->
+
+<div class="modal" id="imageModal">
+<span class="close" onclick="closeModal()">×</span>
+<img id="modalImage">
+</div>
+
+<script>
+
+//header
+
+document.getElementById("hamburgerButton").addEventListener("click", function() {
+    const menu = document.getElementById("menu");
+    menu.style.display = (menu.style.display === "block") ? "none" : "block";
+
+    document.getElementById("myButton").addEventListener("click", function() {
+    });
+
+});
+    
+//end header
+
+
+
+let items = [];
+
+/* Add Item */
+
+function addItem(){
+
+let text = document.getElementById("textInput").value;
+let file = document.getElementById("imgInput").files[0];
+
+if(text === "" && !file) return;
+
+if(file){
+
+let reader = new FileReader();
+
+reader.onload = function(e){
+
+items.push({
+type:"image",
+data:e.target.result
+});
+
+render();
+}
+
+reader.readAsDataURL(file);
+
+}else{
+
+items.push({
+type:"text",
+data:text
+});
+
+render();
+}
+
+document.getElementById("textInput").value="";
+document.getElementById("imgInput").value="";
+}
+
+/* Delete */
+
+function deleteItem(index){
+items.splice(index,1);
+render();
+}
+
+/* Edit Text */
+
+function editItem(index){
+
+if(items[index].type === "text"){
+
+let newText = prompt("Edit text", items[index].data);
+
+if(newText !== null){
+items[index].data = newText;
+}
+
+}
+
+render();
+}
+
+/* Render Display */
+
+function render(){
+
+let container = document.getElementById("listContainer");
+container.innerHTML="";
+
+items.forEach((item,index)=>{
+
+if(item.type === "text"){
+
+container.innerHTML += `
+<div class="card">
+<h3>${item.data}</h3>
+
+<button onclick="editItem(${index})">Edit</button>
+<button onclick="deleteItem(${index})">Delete</button>
+</div>
+`;
+
+}else{
+
+container.innerHTML += `
+<div class="card">
+<img src="${item.data}" onclick="viewImage('${item.data}')">
+
+<br>
+
+<button onclick="deleteItem(${index})">Delete</button>
+</div>
+`;
+
+}
+
+});
+
+}
+
+/* Image Viewer */
+
+function viewImage(src){
+document.getElementById("imageModal").style.display="flex";
+document.getElementById("modalImage").src=src;
+}
+
+function closeModal(){
+document.getElementById("imageModal").style.display="none";
+}
+
+</script>
+
+</body>
+</html>
